@@ -1,2 +1,2 @@
 # op-notification-callback-service
-Callback Service for getting the response for notification sent
+Centralized notification callback wrapper for receiving response from sendgrid and twilio for emails and texts respectively.
