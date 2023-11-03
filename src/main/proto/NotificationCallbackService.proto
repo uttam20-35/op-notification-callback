@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package com.optiviohealth.notification;
+
+option java_multiple_files = true;
+
+/*______________________Simple Models(three tables)____________________________________________________*/
+
+message NotificationCallbackConfig{
+  int64 notificationCallbackConfigId = 1;
+  string applicationSource = 2;
+  string destinationType = 3;
+  bool callbackEnabled = 4;
+  string createdTsz = 5;
+  string updatedTsz = 6;
+}
+
+message NotificationDestinationConfig{
+  int64 notificationDestinationConfigId = 1;
+  NotificationCallbackConfig notificationCallbackConfig = 2;
+  string destinationConfig = 3;
+  string createdTsz = 4;
+  string updatedTsz = 5;
+}
+
+message NotificationLog{
+  int64 notificationLogId = 1;
+  string notificationId = 2;
+  string vendorEventId = 3;
+  string notificationType = 4;
+  string applicationSource = 5;
+  string notificationStatus = 6;
+  string notificationPurpose = 7;
+  string reason = 8;
+  string createdTsz = 9;
+  string updatedTsz = 10;
+}
+/*_______________________Services and required proto_____________________________________________________*/
+
+message GetNotificationCallbackByRequest{
+  int64 notificationCallbackConfigId = 1;
+}
+
+message GetNotificationCallbackResponse{
+  int64 notificationCallbackConfigId = 1;
+}
+
+message CreateNotificationCallbackRequest{
+  string applicationSource = 1;
+  string destinationType = 2;
+  bool callbackEnabled = 3;
+  string createdTsz = 4;
+  string updatedTsz = 5;
+}
+
+service NotificationCallbackConfigService{
+  rpc getNotificationCallbackById(GetNotificationCallbackByRequest) returns (NotificationCallbackConfig){};
+  rpc createNotificationCallback(CreateNotificationCallbackRequest) returns (NotificationCallbackConfig){};
+}
